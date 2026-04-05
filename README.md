@@ -1,153 +1,200 @@
-# ⚙️ Nitaqat Compliance Hiring Optimizer
-### Prescriptive Analytics · Vision 2030 Portfolio Series · App 4 of 4
+🇸🇦 Saudi Workforce: Nitaqat Hiring Optimizer
+Prescriptive Analytics · App 4 of 4 · Vision 2030 Portfolio Series
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://your-app-url.streamlit.app)
-![Python](https://img.shields.io/badge/Python-3.10+-blue)
-![scipy](https://img.shields.io/badge/scipy-LP%20Optimizer-green)
-![Analytics](https://img.shields.io/badge/Analytics-Prescriptive%20LP-brightgreen)
+![alt text](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)
 
----
 
-## 🎯 Problem This Solves
+![alt text](https://img.shields.io/badge/Python-3.10+-blue)
 
-The previous three apps answered *what*, *why*, and *will it happen*. This app answers the hardest question: **what exactly should we do, and at what cost?**
 
-A company knows it needs more Saudi employees — but *which roles*? How many? At what salary? Over what timeline? Given a fixed budget, what is the mathematically optimal hiring plan that achieves Nitaqat compliance at minimum cost?
+![alt text](https://img.shields.io/badge/scipy-LP%20Optimizer-green)
 
-This app uses **Linear Programming (LP)** via `scipy.optimize.linprog` to compute the exact answer — not a rule-of-thumb, not a consultant's guess, but a provably optimal allocation.
 
----
+![alt text](https://img.shields.io/badge/License-MIT-yellow)
 
-## 🧮 The Optimization Problem
+"What should we do, and at what cost?"
+This app uses Mixed-Integer Linear Programming (MILP) to calculate the mathematically optimal hiring plan for Saudi companies to reach Nitaqat compliance targets while minimizing total payroll increases.
 
-### Decision Variables
-`x_i` = number of Saudi nationals to hire in role `i`
+🎯 The Problem
 
-### Objective Function
-**Minimise:** `Σ (salary_i × x_i)` — total monthly payroll cost of new hires
+While Descriptive analytics shows us the current state and Predictive analytics shows us future risks, Prescriptive Analytics provides the solution.
 
-### Constraints
+A company failing Nitaqat compliance needs to hire Saudis, but:
 
-| Constraint | Formula |
-|---|---|
-| **Saudization target** | `(current_saudi + Σx_i) / (current_total + Σx_i) ≥ target%` |
-| **Budget limit** | `Σ(salary_i × x_i) × horizon_months ≤ total_budget` |
-| **Non-negativity** | `x_i ≥ 0` for all roles |
-| **Market capacity** | `x_i ≤ max_hire_i` (Saudi labour market availability cap) |
+Which roles? (IT, Admin, Management, Operations?)
 
-### Solver
-`scipy.optimize.linprog` with HiGHS backend (industry-grade LP solver, same engine used in commercial OR tools).
+How many? (What is the minimum to hit the % target?)
 
----
+What budget? (How do we stay within financial limits?)
 
-## 📊 Dashboard Sections
+This tool replaces "guessing" with a provably optimal allocation using the HiGHS industry-grade solver.
 
-| Section | Content |
-|---|---|
-| **KPI Row** | Current saudization, gap, budget, roles, optimal hire count, monthly cost |
-| **Hire Count Bar** | Role-by-role optimal Saudi hire allocation |
-| **Cost Pie** | Monthly payroll distribution across hired roles |
-| **Gauge Chart** | Before → After saudization % with target line |
-| **Waterfall Chart** | Current → New Hires → Target: gap decomposition |
-| **Hiring Trajectory** | Month-by-month saudization % if hires distributed evenly |
-| **Role Cards** | Each recommended role with hire count, salary, availability, priority |
-| **4-Scenario Analysis** | Baseline / Budget+30% / Shorter Horizon / Target-5pp comparison |
-| **Scenario Charts** | Saudization outcome and cost across scenarios |
-| **Full Plan Table** | Downloadable CSV of complete hiring plan |
-| **Strategy Insight Box** | Auto-generated policy recommendation paragraph |
+🧮 The Optimization Model
 
----
+The app solves the following mathematical problem:
 
-## ⚙️ Role Profile Database
+Objective: Minimize 
+∑
+(
+Salary
+𝑖
+×
+𝑥
+𝑖
+)
+∑(Salary
+i
+	​
 
-24 roles modelled across all 10 sectors with:
-- Salary band (min/max in SAR)
-- **Saudibility score** (0–1): proxy for Saudi labour market availability in that role
-- Sector mapping for filtering
+×x
+i
+	​
 
-Saudibility is calibrated from HRDF workforce surveys and GASTAT employment statistics.
+)
+ — Minimize the new monthly payroll.
 
----
+Decision Variables (
+𝑥
+𝑖
+x
+i
+	​
 
-## 🎛️ Interactive Controls
+): The number of Saudi nationals to hire for each job role.
 
-| Control | Effect |
-|---|---|
-| **Company selector** | Pre-load real company from dataset |
-| **Manual input mode** | Custom sector / headcount / budget |
-| **Hiring horizon** | 3–24 months |
-| **Salary strategy** | Cost-minimise / Balanced / Quality-maximise |
-| **Role selector** | Include/exclude specific job categories |
-| **Decision threshold** | Adjustable in predictive app (App 3) |
+Constraint 1 (Compliance): 
+Current Saudi
++
+∑
+𝑥
+𝑖
+Total Headcount
++
+∑
+𝑥
+𝑖
+≥
+Target %
+Total Headcount+∑x
+i
+	​
 
----
+Current Saudi+∑x
+i
+	​
 
-## 🚀 Quick Start
+	​
 
-```bash
-git clone https://github.com/YOUR_USERNAME/saudi-workforce-prescriptive.git
-cd saudi-workforce-prescriptive
-cp ../saudi-workforce-descriptive/saudi_workforce_data.csv .
+≥Target %
+
+Constraint 2 (Budget): 
+∑
+(
+Salary
+𝑖
+×
+𝑥
+𝑖
+)
+≤
+Monthly Budget
+∑(Salary
+i
+	​
+
+×x
+i
+	​
+
+)≤Monthly Budget
+
+Constraint 3 (Market): 
+𝑥
+𝑖
+≤
+Market Availability Cap
+x
+i
+	​
+
+≤Market Availability Cap
+
+🚀 Quick Start (Local Setup)
+1. Clone the Repository
+code
+Bash
+download
+content_copy
+expand_less
+git clone https://github.com/BaqarW-tech/Workforce--prescriptive-analytics.git
+cd Workforce--prescriptive-analytics
+2. Install Dependencies
+code
+Bash
+download
+content_copy
+expand_less
 pip install -r requirements.txt
+3. Generate the Dataset
+
+Since the workforce data is synthetic and calibrated to GASTAT statistics, run the generator once to create the required CSV:
+
+code
+Bash
+download
+content_copy
+expand_less
+python generate_data.py
+4. Run the App
+code
+Bash
+download
+content_copy
+expand_less
 streamlit run app.py
-```
+📊 Dashboard Features
+Feature	Description
+Scenario Sensitivity	Compare the "Baseline" plan against "Budget +30%" or "Target -5pp" scenarios.
+Saudization Waterfall	Visualizes the gap between current state and the optimized target.
+Role-Level Cards	Detailed hiring recommendations including "Saudibility" scores (market availability).
+Exportable Plan	Download the mathematically optimal hiring roadmap as a CSV for HR implementation.
+Interactive Controls	Adjust hiring horizons (3–24 months) and salary strategies (Cost vs. Quality).
+📁 Repository Structure
+code
+Code
+download
+content_copy
+expand_less
+.
+├── app.py                  # Main Streamlit application & Optimizer logic
+├── generate_data.py        # Script to create synthetic Saudi workforce data
+├── requirements.txt        # Python dependencies (Scipy 1.11+ required)
+├── saudi_workforce_data.csv# Generated dataset (created after running script)
+└── README.md               # This file
+🧠 Why This Portfolio Stands Out
 
-### Google Colab
-```python
-!pip install streamlit pyngrok scipy -q
-from pyngrok import ngrok
-import subprocess, time
-proc = subprocess.Popen(["streamlit", "run", "app.py", "--server.port", "8501"])
-time.sleep(3)
-print(ngrok.connect(8501).public_url)
-```
+In the data science field, Optimization (Operations Research) is a rare skill compared to standard Machine Learning. This project demonstrates:
 
----
+Domain Expertise: Understanding of the KSA Nitaqat regulatory framework and Vision 2030 goals.
 
-## 📁 File Structure
+Technical Seniority: Moving beyond simple "charts" into "Decision Support Systems" using Scipy's MILP solvers.
 
-```
-saudi-workforce-prescriptive/
-├── app.py                      # LP optimizer + Streamlit dashboard
-├── saudi_workforce_data.csv    # Shared dataset (from App 1)
-├── requirements.txt            # 5 dependencies
-└── README.md
-```
+Business Value: Directly addressing a multi-million riyal compliance problem faced by every private sector entity in Saudi Arabia.
 
----
+🔗 The Complete Series
 
-## 🔮 The Complete Analytics Series
+This app is part of the Saudi Workforce Analytics Suite:
 
-| App | Type | Question | Method |
-|---|---|---|---|
-| App 1 ✅ | Descriptive  | *What* is the workforce? | Charts, KPIs, aggregations |
-| App 2 ✅ | Diagnostic   | *Why* are companies failing? | Root cause scoring, heatmaps |
-| App 3 ✅ | Predictive   | *Will* they breach compliance? | Random Forest, Gradient Boosting |
-| **App 4 ✅** | **Prescriptive** | ***What should they do?*** | **Linear Programming optimizer** |
+Descriptive: What does our workforce look like?
 
----
+Diagnostic: Why are we failing Nitaqat targets?
 
-## 💡 Why This Is the Rarest Skill in the Room
+Predictive: When will we fall into the "Red" zone?
 
-In any room of 50 data analytics candidates in KSA:
-- 45 can describe data
-- 20 can diagnose patterns
-- 10 can build a predictive model
-- **2–3 have ever written a constrained optimisation problem**
+Prescriptive: (This App) The Optimal Hiring Roadmap.
 
-Prescriptive analytics with LP is taught in Operations Research programmes, not data analytics bootcamps. Implementing it on a live policy problem — with a proper objective function, binding constraints, and scenario sensitivity — is what separates junior analysts from senior decision-support specialists.
+📄 License
 
----
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 📄 Relevant KSA Institutions
-
-This tool directly addresses the analytical needs of:
-- **HRSD** (Human Resources & Social Development Ministry) — Nitaqat enforcement
-- **GASTAT** — Labour force statistical analysis
-- **HRDF** (Human Resources Development Fund) — Saudization subsidy programs
-- **Vision 2030 Programme Management Office** — Employment target tracking
-- **Big Four & Strategy Consulting firms** in KSA — HR transformation mandates
-
----
-
-*Synthetic data calibrated to published GASTAT and HRSD statistics. No real company or individual data used.*
+Disclaimer: All data used is synthetic and generated for demonstration purposes, calibrated to publicly available HRSD and GASTAT statistical ranges.
