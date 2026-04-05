@@ -1,7 +1,7 @@
 🇸🇦 Saudi Workforce: Nitaqat Hiring Optimizer
 Prescriptive Analytics · App 4 of 4 · Vision 2030 Portfolio Series
 
-![alt text](https://workforce--prescriptive-analytics-hb77e2xlhckfng5dn8us8t.streamlit.app/)
+[![Streamlit](https://raw.githubusercontent.com/streamlit/streamlit-logo/master/streamlit-mark-color-black.png)](https://workforce--prescriptive-analytics-hb77e2xlhckfng5dn8us8t.streamlit.app/)
 
 
 ![alt text](https://img.shields.io/badge/Python-3.10+-blue)
