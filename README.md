@@ -1,8 +1,6 @@
 🇸🇦 Saudi Workforce: Nitaqat Hiring Optimizer
 Prescriptive Analytics · App 4 of 4 · Vision 2030 Portfolio Series
 
-[![Streamlit](https://raw.githubusercontent.com/streamlit/streamlit-logo/master/streamlit-mark-color-black.png)](https://workforce--prescriptive-analytics-hb77e2xlhckfng5dn8us8t.streamlit.app/)
-
 
 ![alt text](https://img.shields.io/badge/Python-3.10+-blue)
 
@@ -14,6 +12,10 @@ Prescriptive Analytics · App 4 of 4 · Vision 2030 Portfolio Series
 
 "What should we do, and at what cost?"
 This app uses Mixed-Integer Linear Programming (MILP) to calculate the mathematically optimal hiring plan for Saudi companies to reach Nitaqat compliance targets while minimizing total payroll increases.
+
+# Live Demo 
+
+[![Streamlit](https://raw.githubusercontent.com/streamlit/streamlit-logo/master/streamlit-mark-color-black.png)](https://workforce--prescriptive-analytics-hb77e2xlhckfng5dn8us8t.streamlit.app/)
 
 🎯 The Problem
 
